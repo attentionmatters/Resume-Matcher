@@ -1,0 +1,150 @@
+[92m16:07:50 - LiteLLM:WARNING[0m: common_utils.py:979 - litellm: could not pre-load bedrock-runtime response stream shape ¡ª Bedrock event-stream decoding will be unavailable. Error: No module named 'botocore'
+[92m16:07:51 - LiteLLM:WARNING[0m: common_utils.py:24 - litellm: could not pre-load sagemaker-runtime response stream shape ¡ª SageMaker event-stream decoding will be unavailable. Error: No module named 'botocore'
+INFO:     Started server process [10252]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:61030 - "GET /docs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61171 - "GET /api/v1/config/language HTTP/1.1" 200 OK
+ERROR:root:LLM health check failed
+Traceback (most recent call last):
+  File "D:\VS code project\Resume-Matcher\apps\backend\.venv\Lib\site-packages\litellm\llms\custom_httpx\aiohttp_transport.py", line 61, in map_aiohttp_exceptions
+    yield
+  File "D:\VS code project\Resume-Matcher\apps\backend\.venv\Lib\site-packages\litellm\llms\custom_httpx\aiohttp_transport.py", line 307, in handle_async_request
+    response = await self._make_aiohttp_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "D:\VS code project\Resume-Matcher\apps\backend\.venv\Lib\site-packages\litellm\llms\custom_httpx\aiohttp_transport.py", line 285, in _make_aiohttp_request
+    response = await client_session.request(**request_kwargs).__aenter__()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\VS code project\Resume-Matcher\apps\backend\.venv\Lib\site-packages\aiohttp\client.py", line 1683, in __aenter__
+    self._resp: _RetType_co = await self._coro
+                              ^^^^^^^^^^^^^^^^
+  File "D:\VS code project\Resume-Matcher\apps\backend\.venv\Lib\site-packages\aiohttp\client.py", line 856, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "D:\VS code project\Resume-Matcher\apps\backend\.venv\Lib\site-packages\aiohttp\client.py", line 834, in _connect_and_send_request
+    await resp.start(conn)
+  File "D:\VS code project\Resume-Matcher\apps\backend\.venv\Lib\site-packages\aiohttp\client_reqrep.py", line 558, in start
+    message, payload = await protocol.read()  # type: ignore[union-attr]
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\VS code project\Resume-Matcher\apps\backend\.venv\Lib\site-packages\aiohttp\streams.py", line 705, in read
+    await self._waiter
+aiohttp.client_exceptions.SocketTimeoutError: Timeout on reading data from socket
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\VS code project\Resume-Matcher\apps\backend\.venv\Lib\site-packages\litellm\llms\custom_httpx\http_handler.py", line 641, in post
+    response = await self.client.send(req, stream=stream)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\VS code project\Resume-Matcher\apps\backend\.venv\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+    )
+    ^
+  File "D:\VS code project\Resume-Matcher\apps\backend\.venv\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\VS code project\Resume-Matcher\apps\backend\.venv\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\VS code project\Resume-Matcher\apps\backend\.venv\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\VS code project\Resume-Matcher\apps\backend\.venv\Lib\site-packages\litellm\llms\custom_httpx\aiohttp_transport.py", line 306, in handle_async_request
+    with map_aiohttp_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\kaisa\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "D:\VS code project\Resume-Matcher\apps\backend\.venv\Lib\site-packages\litellm\llms\custom_httpx\aiohttp_transport.py", line 75, in map_aiohttp_exceptions
+    raise mapped_exc(message) from exc
+httpx.ReadTimeout: Timeout on reading data from socket
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\VS code project\Resume-Matcher\apps\backend\.venv\Lib\site-packages\litellm\llms\custom_httpx\llm_http_handler.py", line 205, in _make_common_async_call
+    response = await async_httpx_client.post(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<10 lines>...
+    )
+    ^
+  File "D:\VS code project\Resume-Matcher\apps\backend\.venv\Lib\site-packages\litellm\litellm_core_utils\logging_utils.py", line 297, in async_wrapper
+    result = await func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\VS code project\Resume-Matcher\apps\backend\.venv\Lib\site-packages\litellm\llms\custom_httpx\http_handler.py", line 670, in post
+    raise litellm.Timeout(
+    ...<4 lines>...
+    )
+litellm.exceptions.Timeout: litellm.Timeout: Connection timed out. Timeout passed=30.0, time taken=30.353 seconds
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\VS code project\Resume-Matcher\apps\backend\.venv\Lib\site-packages\litellm\main.py", line 637, in acompletion
+    response = await init_response
+               ^^^^^^^^^^^^^^^^^^^
+  File "D:\VS code project\Resume-Matcher\apps\backend\.venv\Lib\site-packages\litellm\llms\custom_httpx\llm_http_handler.py", line 337, in async_completion
+    response = await self._make_common_async_call(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<10 lines>...
+    )
+    ^
+  File "D:\VS code project\Resume-Matcher\apps\backend\.venv\Lib\site-packages\litellm\llms\custom_httpx\llm_http_handler.py", line 232, in _make_common_async_call
+    raise self._handle_error(e=e, provider_config=provider_config)
+          ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\VS code project\Resume-Matcher\apps\backend\.venv\Lib\site-packages\litellm\llms\custom_httpx\llm_http_handler.py", line 5149, in _handle_error
+    raise provider_config.get_error_class(
+    ...<3 lines>...
+    )
+litellm.llms.ollama.common_utils.OllamaError: litellm.Timeout: Connection timed out. Timeout passed=30.0, time taken=30.353 seconds
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\VS code project\Resume-Matcher\apps\backend\app\llm.py", line 569, in check_llm_health
+    response = await litellm.acompletion(**kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\VS code project\Resume-Matcher\apps\backend\.venv\Lib\site-packages\litellm\utils.py", line 2100, in wrapper_async
+    raise e
+  File "D:\VS code project\Resume-Matcher\apps\backend\.venv\Lib\site-packages\litellm\utils.py", line 1899, in wrapper_async
+    result = await original_function(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\VS code project\Resume-Matcher\apps\backend\.venv\Lib\site-packages\litellm\main.py", line 656, in acompletion
+    raise exception_type(
+          ~~~~~~~~~~~~~~^
+        model=model,
+        ^^^^^^^^^^^^
+    ...<3 lines>...
+        extra_kwargs=kwargs,
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\VS code project\Resume-Matcher\apps\backend\.venv\Lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 2466, in exception_type
+    raise e
+  File "D:\VS code project\Resume-Matcher\apps\backend\.venv\Lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 2434, in exception_type
+    raise APIConnectionError(
+    ...<4 lines>...
+    )
+litellm.exceptions.APIConnectionError: litellm.APIConnectionError: Ollama_chatException - litellm.Timeout: Connection timed out. Timeout passed=30.0, time taken=30.353 seconds
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+INFO:     127.0.0.1:61172 - "GET /api/v1/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61201 - "GET /api/v1/resumes?resume_id=69aebd64-6eb3-469a-b2c8-94db12a277e2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61202 - "GET /api/v1/resumes/list?include_master=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61204 - "GET /api/v1/resumes/list?include_master=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61205 - "GET /api/v1/resumes?resume_id=69aebd64-6eb3-469a-b2c8-94db12a277e2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61207 - "GET /api/v1/resumes?resume_id=69aebd64-6eb3-469a-b2c8-94db12a277e2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61209 - "GET /api/v1/resumes?resume_id=69aebd64-6eb3-469a-b2c8-94db12a277e2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61214 - "GET /api/v1/resumes?resume_id=69aebd64-6eb3-469a-b2c8-94db12a277e2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61215 - "GET /api/v1/resumes?resume_id=69aebd64-6eb3-469a-b2c8-94db12a277e2 HTTP/1.1" 200 OK
